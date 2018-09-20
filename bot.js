@@ -4599,8 +4599,9 @@ client.channels.get("492272547828596736").send(' ***  BOT  ***   **Leave From** 
 });
   
 
-var prefix = "-";
+
 client.on('message', message => {
+	var prefix = "-";
   if (!message.content.startsWith(prefix)) return;
   const verifed = ["252813587188416512"];
 if (message.content.startsWith(prefix + 'owner')) {
